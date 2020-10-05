@@ -1,6 +1,7 @@
 const { Writable, Transform } = require('stream');
 const fs = require("fs");
 
+const { errorHandler } = require("./utils");
 const caesarCipherShift = require("./shift");
 
 const readable = filePath => {
@@ -10,9 +11,7 @@ const readable = filePath => {
     };
 
     const readFile = fs.createReadStream(filePath, "utf8");
-    readFile.on("error", () =>
-        console.error(`error: incorrect this path: "${ filePath }", or read file does not exists`)
-    );
+    readFile.on("error", () => errorHandler(`error: file read error`));
     return readFile;
 };
 
@@ -29,12 +28,9 @@ const writable = filePath => {
         return new WritableStream({ highWaterMark: 2 });
     };
 
-    if(fs.existsSync(filePath)) {
-        return fs.createWriteStream(filePath, { flags: "a" });
-    } else {
-        console.error(`error: incorrect this path: "${ filePath }", or write file does not exists`);
-        process.exit();
-    };
+    const writeStream = fs.createWriteStream(filePath, { flags: "a" });
+    writeStream.on("error", () => errorHandler(`error: file write error`));
+    return writeStream;
 };
 
 const transformable = (shift, actionType) => {
