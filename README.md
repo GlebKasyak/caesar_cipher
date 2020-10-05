@@ -35,7 +35,7 @@ $ node task1 -a encode -s 7 -i "./input.txt" -o "./output.txt"
 ```
 
 ```bash
-$ node task1 -a decode -s 7 -i input.txt -o output.txt
+$ node task1 --action decode -s 7 --input input.txt --output output.txt
 ```
 
 **Text inside input file:**
