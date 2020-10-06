@@ -30,7 +30,7 @@ function parsePath(filePath){
 };
 
 function parseAction(value) {
-    let action = value.toLocaleLowerCase().trim();
+    const action = value.toLocaleLowerCase().trim();
     if(action === "encode" || action === "decode") return value;
 
     errorHandler("error: You entered an invalid action. Correct: 'encode' or 'decode'");
