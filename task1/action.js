@@ -1,6 +1,7 @@
 const { pipeline } = require('stream');
 
 const { readable, writable, transformable } = require("./stream");
+const { errorHandler } = require("./utils");
 
 module.exports = ({ shift, input, output, action }) => {
     const readableStream = readable(input);
@@ -9,7 +10,7 @@ module.exports = ({ shift, input, output, action }) => {
 
     pipeline(readableStream, transformableStream, writableStream, err => {
         if(err) {
-            console.error(err.code, "Something went wrong, see error description above")
+            errorHandler("Something went wrong, see error description above")
         }
     });
 };
