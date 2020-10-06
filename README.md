@@ -45,3 +45,8 @@ $ node task1 --action decode -s 7 --input input.txt --output output.txt
 **Text inside output file(after encode):**
 > output.txt
 > `Aopz pz zljyla. Tlzzhnl hivba "_" zftivs!`
+
+**Exit from application**
+```bash
+click: ctrl + c
+```
