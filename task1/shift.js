@@ -1,15 +1,17 @@
 
 module.exports = (str, shift, actionType) => {
-    if((shift % 26) === 0) {
+    const range = 26;
+    
+    if((shift % range) === 0) {
         return str
     };
 
     if(shift < 0) {
-        shift += 26;
+        shift += range;
     };
 
     if(actionType === "decode") {
-        shift = 26 - shift;
+        shift = range - shift;
     };
 
     let resultString = "";
@@ -20,9 +22,9 @@ module.exports = (str, shift, actionType) => {
             const charCode = str.charCodeAt(i);
 
             if (charCode >= 65 && charCode <= 90) {
-                symbol = String.fromCharCode(((charCode - 65 + shift) % 26) + 65);
+                symbol = String.fromCharCode(((charCode - 65 + shift) % range) + 65);
             } else if (charCode >= 97 && charCode <= 122) {
-                symbol = String.fromCharCode(((charCode - 97 + shift) % 26) + 97);
+                symbol = String.fromCharCode(((charCode - 97 + shift) % range) + 97);
             };
         };
 
